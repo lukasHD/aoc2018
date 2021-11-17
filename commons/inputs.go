@@ -22,3 +22,7 @@ func LoadLines(fname string) []string {
 
 	return sliceData
 }
+
+func SplitStringToList(input string) []string {
+	return strings.Split(input, ", ")
+}
