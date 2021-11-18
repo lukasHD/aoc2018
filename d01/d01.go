@@ -42,17 +42,35 @@ func FullRun1() {
 }
 
 func QuickRun2(input []string) int {
-	result int := nil
-	seenFrequencies []int
+	seenFrequencies := make(map[int]int)
 	value := 0
-	for i := 0; i < 15; i++ {
-		
+	seenFrequencies[0] += 1
+	for {
+		for _, freq := range input {
+			if freq == "" {
+				continue
+			}
+			i_freq, _ := strconv.Atoi(freq)
+			value += i_freq
+			//fmt.Print(value)
+			//fmt.Print(", ")
+			_, ok := seenFrequencies[value]
+			if ok {
+				//fmt.Println()
+				return value
+			}
+			seenFrequencies[value] += 1
+		}
+		//fmt.Println()
+		//fmt.Println()
 	}
 
-	if (result != nil) {
-		return result
-	} else {
-		panic()
-	}
+}
 
+func FullRun2() {
+	lines := commons.LoadLines("./d01/input.txt")
+
+	result := QuickRun2(lines)
+
+	fmt.Printf("Day 01 - Part 2: %d \n", result)
 }

@@ -17,8 +17,8 @@ func LoadLines(fname string) []string {
 
 	sliceData := strings.Split(string(fileBytes), "\n")
 
-	pretty := "[" + strings.Join(sliceData, ", ") + "]"
-	fmt.Println(pretty)
+	//pretty := "[" + strings.Join(sliceData, ", ") + "]"
+	//fmt.Println(pretty)
 
 	return sliceData
 }
