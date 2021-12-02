@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"log"
+	"lukas/aoc2018/commons"
 	"os"
 )
 
@@ -27,7 +28,7 @@ func getRepeatCountLetters(row string) (bool, bool) {
 	return twoCount, threeCount
 }
 
-func QuickRun1() int {
+func FullRun1() int {
 	var result int
 	twoCount := 0
 	threeCount := 0
@@ -50,6 +51,59 @@ func QuickRun1() int {
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(twoCount * threeCount)
+	result = twoCount * threeCount
+	fmt.Printf("Day 02 - Part 1: %d \n", result)
+	return result
+}
+
+func commonCharacters(a, b string) (int, string) {
+	if len(a) == len(b) {
+		counter := 0
+		result := ""
+		for i := range a {
+			if a[i] == b[i] {
+				result = result + string(a[i])
+			} else {
+				counter += 1
+			}
+
+		}
+		return counter, result
+
+	} else {
+		log.Fatal()
+	}
+	return -1, ""
+}
+
+func compare(fname string, pretty bool) string {
+	rows := commons.LoadLines(fname)
+
+	for i, rowA := range rows {
+		for j := i + 1; j < len(rows); j++ {
+			rowB := rows[j]
+			cnt, common := commonCharacters(rowA, rowB)
+			if pretty {
+				fmt.Println(rowA + "  " + rowB + " cnt=" + fmt.Sprint(cnt) + "  common=" + common)
+			}
+			if cnt == 1 {
+				return common
+			}
+		}
+	}
+	return ""
+}
+
+func QuickRun2() string {
+	var result string = ""
+	result = compare("./d02/test.txt", true)
+	fmt.Printf("Day 02 - Part 2 TEST: %s \n", result)
+	return result
+}
+
+func FullRun2() string {
+	var result string = ""
+	result = compare("./d02/input.txt", false)
+	fmt.Printf("Day 02 - Part 2: %s \n", result)
 	return result
 }
